@@ -1,22 +1,24 @@
 import Link from "next/link";
+import BackButton from "./BackButton";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <header style={{ display: "flex", gap: 14, padding: 12, borderBottom: "1px solid #ddd" }}>
+      <header
+        style={{
+          display: "flex",
+          gap: 14,
+          padding: 12,
+          borderBottom: "1px solid #ddd",
+          alignItems: "center",
+        }}
+      >
         <Link href="/admin">Home</Link>
         <Link href="/admin/students">Students</Link>
         <Link href="/admin/folders">Folders</Link>
         <Link href="/admin/worksheets">Worksheets</Link>
 
-        <button
-          type="button"
-          onClick={() => history.back()}
-          style={{ cursor: "pointer" }}
-          aria-label="Go back"
-        >
-          Back
-        </button>
+        <BackButton />
 
         <div style={{ marginLeft: "auto" }}>
           <Link href="/admin/logout">Logout</Link>
@@ -27,3 +29,4 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     </div>
   );
 }
+
