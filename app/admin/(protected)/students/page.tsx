@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { upsertStudent, resetStudentPin } from "@/lib/actions";
 import { supabaseServer } from "@/lib/supabase";
 
