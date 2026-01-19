@@ -1,3 +1,4 @@
+import AdminSubmissionsSelector from "@/components/AdminSubmissionsSelector";
 import { StatusBadge } from "@/components/StatusBadge";
 import { supabaseServer } from "@/lib/supabase";
 
@@ -51,23 +52,10 @@ export default async function SubmissionsPage({
       <div className="card">
         <h1>Submissions</h1>
         <p className="muted">Select a worksheet to review student submission status.</p>
-        <form style={{ marginTop: 16 }}>
-          <label className="label" htmlFor="worksheet">Worksheet</label>
-          <select
-            className="input"
-            id="worksheet"
-            name="worksheet"
-            defaultValue={selectedWorksheetId ?? ""}
-            onChange={(event) => event.currentTarget.form?.submit()}
-          >
-            <option value="">Select a published worksheet</option>
-            {worksheets?.map((worksheet) => (
-              <option key={worksheet.id} value={worksheet.id}>
-                {worksheet.title} · {worksheet.published_at ?? worksheet.created_at}
-              </option>
-            ))}
-          </select>
-        </form>
+        <AdminSubmissionsSelector
+          worksheets={worksheets ?? []}
+          selectedWorksheetId={selectedWorksheetId}
+        />
       </div>
 
       {selectedWorksheet && (
