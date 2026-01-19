@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { ReactNode } from "react";
+import Link from "next/link";
 
 export const metadata = {
   title: "WorksheetVault",
@@ -12,7 +13,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <header className="navbar">
           <div className="container">
-            <div style={{ fontWeight: 700 }}>WorksheetVault</div>
+            <Link href="/" style={{ fontWeight: 700 }}>
+              WorksheetVault
+            </Link>
             <div className="muted">Secure worksheet workspace</div>
           </div>
         </header>
