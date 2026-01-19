@@ -5,6 +5,9 @@ import Link from "next/link";
 export default function AdminHeader() {
   return (
     <header style={{ display: "flex", gap: 14, padding: 12, borderBottom: "1px solid #ddd" }}>
+      <Link href="/admin" style={{ fontWeight: 700 }}>
+        WorksheetVault
+      </Link>
       <Link href="/admin">Home</Link>
       <Link href="/admin/students">Students</Link>
       <Link href="/admin/folders">Folders</Link>
