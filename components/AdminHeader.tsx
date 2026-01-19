@@ -9,6 +9,7 @@ export default function AdminHeader() {
       <Link href="/admin/students">Students</Link>
       <Link href="/admin/folders">Folders</Link>
       <Link href="/admin/worksheets">Worksheets</Link>
+      <Link href="/admin/submissions">Submissions</Link>
 
       <button
         type="button"
