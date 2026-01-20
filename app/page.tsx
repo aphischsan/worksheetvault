@@ -1,8 +1,18 @@
-export default function HomePage() {
+export default function HomePage({
+  searchParams
+}: {
+  searchParams: { loggedOut?: string };
+}) {
+  const showLoggedOut = searchParams.loggedOut === "1";
   return (
     <div className="grid grid-2">
       <div className="card">
         <h1>Welcome to WorksheetVault</h1>
+        {showLoggedOut && (
+          <p className="badge" style={{ marginTop: 12 }}>
+            You have been logged out.
+          </p>
+        )}
         <p className="muted">
           A secure worksheet repository for students and teachers. Students
           answer, save, and submit worksheets directly online.

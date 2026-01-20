@@ -20,6 +20,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               WorksheetVault
             </Link>
             <div className="muted">Secure worksheet workspace</div>
+            {studentRegNo && (
+              <Link href="/logout" style={{ marginLeft: "auto", fontWeight: 600 }}>
+                Logout
+              </Link>
+            )}
           </div>
         </header>
         <main>

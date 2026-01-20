@@ -3,5 +3,5 @@ import { redirect } from "next/navigation";
 
 export default function AdminLogoutPage() {
   clearAdminSession();
-  redirect("/admin/login");
+  redirect("/?loggedOut=1");
 }
