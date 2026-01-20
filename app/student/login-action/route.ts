@@ -33,12 +33,12 @@ export async function POST(request: Request) {
     .maybeSingle();
 
   if (error || !student) {
-    return NextResponse.redirect(new URL("/student/login?error=invalid", request.url));
+    return NextResponse.redirect(new URL("/student/login?error=invalid", request.url), 303);
   }
 
   // NOTE: If your DB stores hashed pins, this needs bcrypt compare.
   if (String(student.pin) !== pin) {
-    return NextResponse.redirect(new URL("/student/login?error=invalid", request.url));
+    return NextResponse.redirect(new URL("/student/login?error=invalid", request.url), 303);
   }
 
   // Set cookie for 30 days
@@ -52,6 +52,6 @@ export async function POST(request: Request) {
     maxAge: 60 * 60 * 24 * 30,
   });
 
-  return NextResponse.redirect(new URL("/student/dashboard", request.url));
+  return NextResponse.redirect(new URL("/student/dashboard", request.url), 303);
 }
 
