@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import WorksheetForm from "@/components/WorksheetForm";
 import { requireStudent } from "@/lib/auth";
 import { supabaseServer } from "@/lib/supabase";
