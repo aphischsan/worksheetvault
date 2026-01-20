@@ -5,11 +5,16 @@ const ADMIN_COOKIE = "wv_admin";
 const STUDENT_COOKIE = "wv_student";
 
 export function setAdminSession() {
-  cookies().set(ADMIN_COOKIE, "true", { httpOnly: true, sameSite: "lax" });
+  cookies().set(ADMIN_COOKIE, "true", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/"
+  });
 }
 
 export function clearAdminSession() {
-  cookies().set(ADMIN_COOKIE, "", { expires: new Date(0) });
+  cookies().set(ADMIN_COOKIE, "", { expires: new Date(0), path: "/" });
 }
 
 export function requireAdmin() {
