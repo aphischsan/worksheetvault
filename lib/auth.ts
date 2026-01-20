@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const ADMIN_COOKIE = "wv_admin";
-const STUDENT_COOKIE = "student_session";
+const STUDENT_COOKIE = "wv_student";
 
 export function setAdminSession() {
   cookies().set(ADMIN_COOKIE, "true", { httpOnly: true, sameSite: "lax" });
@@ -25,7 +25,7 @@ export function setStudentSession(regNo: string) {
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7
+    maxAge: 60 * 60 * 24 * 30
   });
 }
 

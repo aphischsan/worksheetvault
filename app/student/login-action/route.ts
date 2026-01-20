@@ -1,12 +1,11 @@
 import bcrypt from "bcryptjs";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase";
 
-const STUDENT_COOKIE = "student_session";
+const STUDENT_COOKIE = "wv_student";
 
 const redirectWithError = (request: Request, error: string) =>
-  NextResponse.redirect(new URL(`/student/login?error=${encodeURIComponent(error)}`, request.url));
+  NextResponse.redirect(new URL(`/student/login?error=${encodeURIComponent(error)}`, request.url), 303);
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -56,13 +55,13 @@ export async function POST(request: Request) {
     .update({ failed_attempts: 0, locked_until: null })
     .eq("reg_no", regNo);
 
-  cookies().set(STUDENT_COOKIE, regNo, {
+  const response = NextResponse.redirect(new URL("/student/dashboard", request.url), 303);
+  response.cookies.set(STUDENT_COOKIE, regNo, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7
+    maxAge: 60 * 60 * 24 * 30
   });
-
-  return NextResponse.redirect(new URL("/student/dashboard", request.url));
+  return response;
 }

@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const studentRegNo = cookies().get("student_session")?.value;
+  const studentRegNo = cookies().get("wv_student")?.value;
   const homeHref = studentRegNo ? "/student/dashboard" : "/";
   return (
     <html lang="en">

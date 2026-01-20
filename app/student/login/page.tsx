@@ -15,7 +15,7 @@ export default function StudentLoginPage({
     <div className="card" style={{ maxWidth: 420, margin: "0 auto" }}>
       <h1>Student Login</h1>
       <p className="muted">Enter your registration number and 4-digit PIN.</p>
-      <form action="/student/login" method="post" style={{ marginTop: 24 }}>
+      <form action="/student/login-action" method="post" style={{ marginTop: 24 }}>
         <label className="label" htmlFor="reg_no">Registration Number</label>
         <input className="input" id="reg_no" name="reg_no" required />
         <label className="label" htmlFor="pin" style={{ marginTop: 12 }}>4-digit PIN</label>
