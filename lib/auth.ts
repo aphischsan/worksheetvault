@@ -20,11 +20,16 @@ export function requireAdmin() {
 }
 
 export function setStudentSession(regNo: string) {
-  cookies().set(STUDENT_COOKIE, regNo, { httpOnly: true, sameSite: "lax" });
+  cookies().set(STUDENT_COOKIE, regNo, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/"
+  });
 }
 
 export function clearStudentSession() {
-  cookies().set(STUDENT_COOKIE, "", { expires: new Date(0) });
+  cookies().set(STUDENT_COOKIE, "", { expires: new Date(0), path: "/" });
 }
 
 export function requireStudent() {
