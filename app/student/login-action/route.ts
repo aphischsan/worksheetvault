@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   const pin = String(form.get("pin") ?? "").trim();
 
   if (!reg_no || !pin) {
-    return NextResponse.redirect(new URL("/student/login?error=missing", request.url));
+    return NextResponse.redirect(new URL("/student/login?error=missing", request.url), 303);
   }
 
   const supabase = getSupabaseAdmin();
