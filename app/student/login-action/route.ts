@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   const supabase = supabaseServer();
   const { data: student, error } = await supabase
     .from("students")
-    .select("reg_no, pin_hash, active, failed_attempts, locked_until")
+    .select("reg_no, pin, active, failed_attempts, locked_until")
     .eq("reg_no", regNo)
     .single();
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     return redirectWithError(request, "locked");
   }
 
-  const pinMatches = await bcrypt.compare(pin, student.pin_hash);
+  const pinMatches = await bcrypt.compare(pin, student.pin);
   if (!pinMatches) {
     const failedAttempts = (student.failed_attempts ?? 0) + 1;
     const updates: Record<string, string | number | null> = {
