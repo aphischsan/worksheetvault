@@ -15,7 +15,7 @@ type SubmissionRow = {
 export default async function SubmissionsPage({
   searchParams
 }: {
-  searchParams: { worksheet?: string };
+  searchParams: { worksheet?: string; worksheetId?: string };
 }) {
   const supabase = supabaseServer();
   const { data: worksheets } = await supabase
@@ -24,7 +24,7 @@ export default async function SubmissionsPage({
     .eq("is_published", true)
     .order("published_at", { ascending: false });
 
-  const selectedWorksheetId = searchParams.worksheet;
+  const selectedWorksheetId = searchParams.worksheetId ?? searchParams.worksheet;
   const selectedWorksheet = worksheets?.find((worksheet) => worksheet.id === selectedWorksheetId);
 
   const { data: students } = selectedWorksheet

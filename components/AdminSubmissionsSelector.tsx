@@ -22,10 +22,11 @@ export default function AdminSubmissionsSelector({
   const handleChange = (nextId: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (nextId) {
-      params.set("worksheet", nextId);
+      params.set("worksheetId", nextId);
     } else {
-      params.delete("worksheet");
+      params.delete("worksheetId");
     }
+    params.delete("worksheet");
     const query = params.toString();
     router.push(query ? `/admin/submissions?${query}` : "/admin/submissions");
   };
