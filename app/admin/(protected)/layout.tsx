@@ -1,7 +1,11 @@
 import Link from "next/link";
 import BackButton from "./BackButton";
+import { requireAdmin } from "@/lib/auth"; // Import this
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  // Fix: Enforce authentication for all admin pages
+  requireAdmin();
+
   return (
     <div>
       <header
@@ -21,7 +25,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <BackButton />
 
         <div style={{ marginLeft: "auto" }}>
-          <Link href="/admin/logout">Logout</Link>
+          {/* Note: This link should ideally point to a server action or route that calls clearAdminSession */}
+          <Link href="/admin/login">Logout</Link>
         </div>
       </header>
 
@@ -29,4 +34,3 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     </div>
   );
 }
-
