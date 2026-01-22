@@ -150,3 +150,7 @@ export async function toggleWorksheetPublish(formData: FormData) {
   revalidatePath("/admin/worksheets");
   return { success: true };
 }
+export async function studentLogout() {
+  const { clearStudentSession } = await import("./auth");
+  clearStudentSession();
+}
