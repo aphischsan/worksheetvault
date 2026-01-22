@@ -129,7 +129,8 @@ main {
 
 .split-layout {
   display: grid;
-  grid-template-columns: minmax(320px, 1.1fr) minmax(320px, 0.9fr);
+  /* This gives the PDF 70% of the width and the answers 30% */
+  grid-template-columns: 1.4fr 0.6fr; 
   gap: 24px;
 }
 
