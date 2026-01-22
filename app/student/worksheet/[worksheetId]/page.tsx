@@ -39,7 +39,7 @@ export default async function WorksheetPage({ params }: { params: { worksheetId:
           <iframe
             src={worksheet?.pdf_url}
             title="Worksheet PDF"
-            style={{ width: "100%", height: "80vh", border: "1px solid #e5e7eb", borderRadius: 12 }}
+            style={{ width: "100%", height: "120vh", border: "1px solid #e5e7eb", borderRadius: 12 }}
           />
         </div>
       </div>
