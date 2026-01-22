@@ -26,6 +26,9 @@ export default function WorksheetForm({
   const [status, setStatus] = useState<"DRAFT" | "SUBMITTED">("DRAFT");
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
+  // Fix: Lock the form if server says so OR if client just submitted
+  const isLocked = locked || status === "SUBMITTED";
+
   const payload = useMemo(
     () => ({
       worksheetId,
@@ -58,19 +61,20 @@ export default function WorksheetForm({
   };
 
   useEffect(() => {
-    if (locked) {
+    // Fix: Stop autosave immediately if isLocked is true
+    if (isLocked) {
       return;
     }
     const interval = setInterval(() => {
       void saveSubmission("DRAFT", answers);
     }, 5000);
     return () => clearInterval(interval);
-  }, [answers, locked]);
+  }, [answers, isLocked]);
 
   const handleChange = (taskId: string, value: string) => {
     const nextAnswers = { ...answers, [taskId]: value };
     setAnswers(nextAnswers);
-    if (!locked) {
+    if (!isLocked) {
       void saveSubmission("DRAFT", nextAnswers);
     }
   };
@@ -89,7 +93,7 @@ export default function WorksheetForm({
               rows={4}
               value={answers[task.id] || ""}
               onChange={(event) => handleChange(task.id, event.target.value)}
-              disabled={locked}
+              disabled={isLocked}
               required={task.required}
             />
           ) : (
@@ -97,7 +101,7 @@ export default function WorksheetForm({
               className="input"
               value={answers[task.id] || ""}
               onChange={(event) => handleChange(task.id, event.target.value)}
-              disabled={locked}
+              disabled={isLocked}
               required={task.required}
             />
           )}
@@ -107,7 +111,7 @@ export default function WorksheetForm({
         <button
           className="button"
           type="button"
-          disabled={locked}
+          disabled={isLocked}
           onClick={() => {
             setStatus("SUBMITTED");
             void saveSubmission("SUBMITTED", answers);
@@ -115,7 +119,7 @@ export default function WorksheetForm({
         >
           Submit Worksheet
         </button>
-        {locked && <span className="badge">Submission locked</span>}
+        {isLocked && <span className="badge">Submission locked</span>}
         {saveMessage && <span className="muted">{saveMessage}</span>}
       </div>
     </div>
