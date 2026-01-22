@@ -1,3 +1,4 @@
+import StudentLogoutButton from "@/components/StudentLogoutButton";
 import { StatusBadge } from "@/components/StatusBadge";
 import { requireStudent } from "@/lib/auth";
 import { supabaseServer } from "@/lib/supabase";
@@ -30,10 +31,15 @@ export default async function StudentDashboardPage() {
 
   return (
     <div className="grid" style={{ gap: 24 }}>
-      <div className="card">
-        <h1>Welcome back</h1>
-        <p className="muted">Registration: {regNo}</p>
-      </div>
+     <div className="card">
+  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <div>
+      <h1>Welcome back</h1>
+      <p className="muted">Registration: {regNo}</p>
+    </div>
+    <StudentLogoutButton />
+  </div>
+</div>
 
       <div className="card">
         <h2 className="section-title">Latest</h2>
